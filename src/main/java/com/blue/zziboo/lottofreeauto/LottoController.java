@@ -13,4 +13,5 @@ public class LottoController {
         System.out.println("컨트롤러");
         return "hello";
     }
+
 }

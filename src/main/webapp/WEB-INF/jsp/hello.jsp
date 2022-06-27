@@ -24,7 +24,7 @@
                 <h1>자동 로또 번호 생성기</h1>
             </div>
             <div id="textBox">
-                <input type="text" id="howMuch" style="width: 100px;" placeholder="얼마 할거냐ㅋ"></input>
+                <input type="text" id="howMuch" style="width: 100px;" placeholder="1000이상 입력"></input>
                 <button type="button" id="lottoBtn" >생성</button>
             </div>
             <div id="resultBox">
@@ -37,8 +37,17 @@
 <script>
     $(document).ready(function (){
         $('#lottoBtn').click(function (){
-            alert($('#howMuch').val());
+            if($('#howMuch').val() == "")alert("값을 입력하세용");
+            if($('#howMuch').val() != ""&&  $('#howMuch').val() <1000)alert("1000 이상 입력하시라고요ㅋㅋ");
+            fn_showLotto();
         });
     });
+
+    function fn_showLotto(){
+        var count = parseInt($('#howMuch').val()/1000);
+        document.getElementById("resultBox").innerText = count;
+
+        var lottoList = new Array(count);
+    }
 </script>
 </html>
