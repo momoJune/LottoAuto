@@ -1,3 +1,5 @@
+<%@ page import="java.util.Random" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <!doctype html>
@@ -7,7 +9,8 @@
     #mainBox{ border: 2px solid black; width: 500px; height: 500px; margin-left: 40%; margin-top: 10%; }
     #title{height: 50px; text-align: center;}
     #textBox{padding-top:20px; padding-left: 35%; }
-    #resultBox{width: 400px; border: 1px solid gray; height: 270px; margin-top: 60px; margin-left: 50px;}
+    #resultBox{width: 400px; border: 1px solid gray; height: 270px; margin-top: 50px; margin-left: 50px; text-align: center;}
+    #lottoNum{width: 400px; height: 240px; margin-top: 50px;}
 </style>
 <head>
     <script src="/webjars/jquery/dist/jquery.min.js"></script>
@@ -28,10 +31,14 @@
                 <button type="button" id="lottoBtn" >생성</button>
             </div>
             <div id="resultBox">
+                <div id="lottoNum">
+                </div>
 
             </div>
         </div>
     </div>
+
+
 
 </body>
 <script>
@@ -40,14 +47,23 @@
             if($('#howMuch').val() == "")alert("값을 입력하세용");
             if($('#howMuch').val() != ""&&  $('#howMuch').val() <1000)alert("1000 이상 입력하시라고요ㅋㅋ");
             fn_showLotto();
+
         });
     });
 
     function fn_showLotto(){
         var count = parseInt($('#howMuch').val()/1000);
-        document.getElementById("resultBox").innerText = count;
-
-        var lottoList = new Array(count);
+        document.getElementById("resultBox").innerText = count + " 회 가능";
+        const list = Array(Array(),Array(),Array(),Array(),Array(),Array());
+            var num = 0;
+                for(var j = 0; j<count;j++){
+                    for(var i = 0; i<6; i++){
+                        num = Math.floor(Math.random() * 45) + 1;
+                        if(list.pop() != num) list.push(num);
+                    }
+                }
     }
+
+
 </script>
 </html>
