@@ -32,8 +32,9 @@
             </div>
             <div id="resultBox">
                 <div id="lottoNum">
+                    <div > </div>
                 </div>
-
+                arr[1][2]
             </div>
         </div>
     </div>
@@ -54,16 +55,32 @@
     function fn_showLotto(){
         var count = parseInt($('#howMuch').val()/1000);
         document.getElementById("resultBox").innerText = count + " 회 가능";
-        const list = Array(Array(),Array(),Array(),Array(),Array(),Array());
-            var num = 0;
-                for(var j = 0; j<count;j++){
-                    for(var i = 0; i<6; i++){
-                        num = Math.floor(Math.random() * 45) + 1;
-                        if(list.pop() != num) list.push(num);
-                    }
-                }
+
+        var arr = create2DArray(count, 6);
+        var list = new Array();
+        var str = "";
+        var str1 = " ";
+
+        for(var i = 0; i<count;i++){
+            for(var j = 0; j<6;j++){
+                arr[i][j] = Math.floor(Math.random() *45) +1;
+                if(j>0 && arr[i][j] ==arr[i][j-1]) i--;
+                list.push("(" + arr[i][j]+")");
+            }
+
+
+        }
+        console.log(list);
     }
 
+    function create2DArray(rows, columns) {
+        var count = parseInt($('#howMuch').val()/1000);
+        var arr = new Array(rows);
+        for (var i = 0; i < count; i++) {
+            arr[i] = new Array(6);
+        }
+        return arr;
+    }
 
 </script>
 </html>
