@@ -19,10 +19,13 @@
 </head>
 <body>
     <div>
-        <div id="mainBox">
-            <input type="text" id="count" placeholder="얼마"/>
-            <button type="button" id="lottoBtn" >생성</button>
-        </div>
+        <form>
+            <div id="mainBox">
+                <input type="text" id="count" placeholder="몇번"/>
+                <button type="button" id="lottoBtn" >생성</button>
+                <input type="reset" id="reset" value="초기화">
+            </div>
+        </form>
     </div>
 
 
@@ -31,14 +34,20 @@
 <script>
         $('#lottoBtn').click(function (){
             var count = document.getElementById('count').value;
-            var list = new Array()
             var myRandom = 0;
             var check;
-
+            var str = "";
+            var games = 1;
             if(!(count>0&&count<11)){
                 alert("1~10 사이의 숫자를 입력해 주세요.");
+                $("#reset").trigger("click");
             }else{
                 for(var c = 0; c < count; c++){
+                    if(games<10)games = " "+games;
+                    if(c != count) str += games + " : "
+                    games++;
+
+                    var list = new Array()
                     for(var i = 0; i < 6; i++){
                         myRandom = Math.floor(Math.random() * (45 - 1 + 1)) + 1;
                         if(myRandom<10)myRandom = "0" + myRandom;
@@ -47,21 +56,25 @@
                             i--;
                         }else{
                             list.push(myRandom);
+                            str += "(" + list[i] + ")" + " ";
                         }
                     }
+                    str += "\n";
                 }
-                alert(list);
+                alert(str);
+
             }
         });
 
-        function checkDup(num, list) {
-            var check = 0;
-            if (list.length > 0) {
-                for (var i = 0; i < list.length; i++) {
-                    if (num == list[i]) check++;
+        //중복 체크크
+       function checkDup(num, lists) {
+            var checkD = 0;
+            if (lists.length > 0) {
+                for (var i = 0; i < lists.length; i++) {
+                    if (num == lists[i]) checkD++;
                 }
             }
-            return check;
+            return checkD;
         }
 
 
